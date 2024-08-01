@@ -1,4 +1,5 @@
 # City Deamer
+![作者团队](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/0.%E4%BD%9C%E8%80%85%E5%9B%A2%E9%98%9F.jpg)
 
 <p>&emsp;&emsp;本篇文章作者团队来自于南洋理工大学 S-Lab，其中陈昭熹是之前阅读的Scene Dreamer的一作，两篇文章具有很强的相关性。</p>
 <p>&emsp;&emsp;本文创新点如下：<br>
@@ -6,6 +7,8 @@
 (2)作者将城市场景分为两部分：背景与建筑物，分别进行生成体积渲染。使用BEV Representation进行场景表示(Scene Dreamer)，利用Neural Hash Grid处理建筑物(Scene Dreamer)<br>
 (3)将房屋分为立面与房顶两部分，通过添加风格编码实现建筑物生成的细分类生成。<br>
 (4)作者提供了实验使用的OSM与Google Earth数据集。</p>
+
+![整体概况](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/1.%E6%95%B4%E4%BD%93%E6%95%88%E6%9E%9C%E5%9B%BE.jpg)
 
 ## 实验工作面对难点与Pipeline
 ### 工作难点
@@ -16,7 +19,12 @@
 ### 本文工作的Pipeline
 <p>&emsp;&emsp;CityDreamer分4步：1.无边界Layout生成器创建任意城市layout L。2.城市背景生成器生成背景图片附带相关的掩膜。3.建筑实体生成器，生成建筑实体与各自对应的掩膜。4.组成器：将渲染背景与建筑实例合并到单个内聚连续的图像中。如下图所示为文章Pipeline。
 
+![Pipline](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/4.Pipline.jpg)
+
 ### 结果
+
+![定量评价](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/2.%E5%AE%9A%E9%87%8F%E8%AF%84%E5%AE%9A.jpg)
+![定性评价](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/3.%E5%AE%9A%E6%80%A7%E8%AF%84%E5%AE%9A.jpg)
 
 
 ## 模型
