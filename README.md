@@ -4,7 +4,7 @@
 <P> 
 The Table 1 is the paper that I have intensive reading, so there will be detailed information about this paper. If I have read the code, I will show my understanding about it. If it is the early work that I think it is important, I will not show the result of the expriment the author showing in the paper. I will oly show the recent work's result.<br>
 The Table 2 is the paper that I have skimmed, so there will just abound with something interesting for me.<br> 
-I have divide this into 4 parts: <br>(1) Use the 3DGS <br>(2) Use the NeFR <br>(3) Use the Diffusion model <br>(4)Other related papers(such as dataset, 2D generation, other 3D generation).
+I have divide this into 4 parts: <br>(1) Use the 3DGS <br>(2) Use the NeFR <br>(3) Use the Diffusion model <br>(4) Other related papers(such as dataset, 2D generation, other 3D generation).
 
 # Table 1(Intensive Reading) 
 | Title | Author | Source | Overview |
