@@ -14,4 +14,10 @@ The Table 2 is the paper that I have skimmed, so there will just abound with som
 
 
 
-# table 2(skimming)
+# table 2.1(skimming-3DGS)
+
+# table 2.2(skimming-NeRF)
+
+# table 2.3(skimming-Diffusion)
+
+# tanle 2.4(others)
