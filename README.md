@@ -20,4 +20,4 @@ The Table 2 is the paper that I have skimmed, so there will just abound with som
 
 # table 2.3(skimming-Diffusion)
 
-# tanle 2.4(others)
+# tanle 2.4(skimming-others)
