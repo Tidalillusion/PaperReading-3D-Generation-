@@ -76,6 +76,8 @@
 <p>&emsp;&emsp;BEV-Point Representation:通过光线交汇的可视性判断，BEV-Point Representation可以使得随着场景尺寸增加的内存开支基本保持为均值。通过两种方法点的数量与占用的显存关系图以及点的数量与占用内存的关系图来反映。<br>
 &emsp;&emsp;此外作者还测试了基于场景或者基于实例的点过滤方法，结果表明还是可见性过滤方案的效果最佳。</p>
 
+SUM:作者消融实验的思路：首先消除组件来判断组件对实验结果的影响；其次更换组件来证明组件的优越性。
+
 <p>&emsp;&emsp;BEV-Decoder:由于BEV-Point Decoder由Point Serializer以及Point Transformer组成，因此分别对这两部分进行消融实验，通过FID、KID、CE、DE来反映两部分组件的作用。<br>
 &emsp;&emsp;此外作者还将Serializer的方式替换为公式13以及希尔伯特曲线来进行实验，通过上述四种参数反映本文Serializer的重要作用。
 
