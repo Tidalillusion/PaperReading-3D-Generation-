@@ -1,15 +1,19 @@
 # GaussianCity: Generative Gaussian Splatting for Unbounded 3D City Generation
-
+![作者团队](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/D3.1%E4%BD%9C%E8%80%85%E5%9B%A2%E9%98%9F.jpg)
 <p>&emsp;&emsp; 本篇文章文章作者团队来自于南洋理工大学S-Lab，是Scene Dreamer以及Dreamer City的续作。<br>
 &emsp;&emsp;本篇文章旨在使用3DGS技术进行无边界三维城市模型生成。本文创新点如下：<br>
 (1)目前首个利用3DGS技术进行无边界场景生成的模型。<br>
 (2)本文通过提出紧凑3D 场景表示方法——BEV-point确保了生成无边界场景的连续性并降低了场景生成过程中随尺度增加的内存开支<br>
 (3)本文提出Spatial-aware Gaussian Attribute Decoder来利用局部结构化信息从而生成三维高斯的属性<br>
-(4)实验结果表明，在GGE以及KITTI-360两个数据集上的生成效果达到了SOTA；同时相较于NeRF显著提高了生成效率<br>
+(4)实验结果表明，在GGE以及KITTI-360两个数据集上的生成效果达到了SOTA；同时相较于NeRF显著提高了生成效率</p>
 
+实验总览如下图所示：
+![overview](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/D3.2overview.jpg)
 
 ## 模型
 &emsp;&emsp;如下下图所示，本文模型主要分为三个部分，分别是BEV-point初始化，BEV-Point特征生成，BEV-Point解码。
+
+![pipeline](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/D3.3pipeline.jpg)
 
 ### 1.BEV点初始化
 <p>&emsp;&emsp;同样采取之前Scene Dreamer提出的局部框生成的思想以及BEV Representation的思想。这里初始的BEV-MAP由Semantic Map以及Height Map组成，并通过局部生成。<br>
@@ -62,10 +66,18 @@
 ## 实验
 ### 1.实验数据集
 <p>&emsp;&emsp;实验使用数据集包含了Google Earth以及KITTI-360两个数据集。其中，Google Earth数据集在City Dreamer中已经使用。<br>
-&emsp;&emsp;而KITTI-360则是街景数据集，路程长度共73.7km，提供了包含道路、车辆、建筑物等物体的三维标注。该数据集中的数据包含了丰富的高亮与阴影变换，反映了物体表面丰富的变换。
+&emsp;&emsp;而KITTI-360则是街景数据集，路程长度共73.7km，提供了包含道路、车辆、建筑物等物体的三维标注。该数据集中的数据包含了丰富的高亮与阴影变换，反映了物体表面丰富的变换。</p>
+<p>&emsp;&emsp;定性评估的结果如下面两图所示：
+  
+![GGE](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/D3.5%E5%AE%9A%E6%80%A7%E7%BB%93%E6%9E%9C.jpg)
+
+![KITTI](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/D3.6%E5%AE%9A%E6%80%A7%E7%BB%93%E6%9E%9C2.jpg)
 
 ### 2.评估手段
 &emsp;&emsp;这里评估手段主要包含：FID＆KID，Depth Error，Camera Error、Runtime。
+![quality](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/D3.4%E5%AE%9A%E9%87%8F%E7%BB%93%E6%9E%9C.jpg)
+
+
 
 ### 3.相关细节＆结果
 <p>&emsp;&emsp;作者提供了训练数据细节以及超参数的设置信息。<br>
@@ -73,13 +85,15 @@
 
 ### 4.消融实验
 <p>&emsp;&emsp;本文的消融实验主要是针对BEV-Point Representation以及BEV-Point decoder进行的。</p>
-<p>&emsp;&emsp;BEV-Point Representation:通过光线交汇的可视性判断，BEV-Point Representation可以使得随着场景尺寸增加的内存开支基本保持为均值。通过两种方法点的数量与占用的显存关系图以及点的数量与占用内存的关系图来反映。<br>
+<p>&emsp;&emsp;BEV-Point Representation:通过光线交汇的可视性判断，BEV-Point Representation可以使得随着场景尺寸增加的内存开支基本保持为均值。通过两种方法点的数量与占用的显存关系图以及点的数量与占用内存的关系图来反映。该部分实验作者放在了overview中。<br>
 &emsp;&emsp;此外作者还测试了基于场景或者基于实例的点过滤方法，结果表明还是可见性过滤方案的效果最佳。</p>
 
 SUM:作者消融实验的思路：首先消除组件来判断组件对实验结果的影响；其次更换组件来证明组件的优越性。
 
 <p>&emsp;&emsp;BEV-Decoder:由于BEV-Point Decoder由Point Serializer以及Point Transformer组成，因此分别对这两部分进行消融实验，通过FID、KID、CE、DE来反映两部分组件的作用。<br>
 &emsp;&emsp;此外作者还将Serializer的方式替换为公式13以及希尔伯特曲线来进行实验，通过上述四种参数反映本文Serializer的重要作用。
+
+![AL2](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/D3.6%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C2.jpg)
 
 ## 局限性
 &emsp;&emsp;本文局限主要在于通过根据将BEV点初始化高度抬升的假设，默认了建筑符合曼哈顿假设，无法表示空心结构。其次，解码器没有充分利用3DGS的能力，（仅仅使用了其RGB预测结果），然而预测过多属性会破坏训练效果。
