@@ -2,6 +2,8 @@
 
 
 <p>&emsp;&emsp;作者团队主要来自于KAIST（韩国国家科学院）。
+  
+![authors](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/Semcity1.%E4%BD%9C%E8%80%85%E5%9B%A2%E9%98%9F.jpg)
 
 <p>&emsp;&emsp;创新点：<br>
 &emsp;&emsp;1.使用Triplane Diffusion model进行户外场景生成，有效应对真实户外场景生成存在的非结构性与稀疏性问题。<br>
@@ -11,16 +13,25 @@
 ## 实验模型
 ### overview
 <p>&emsp;&emsp;本文模型Pipeline如下图所示。生成过程主要由两个部分组成：Triplane learning（编码解码器）以及Triplane diffusion（Triplane生成器）两个部分组成。<br>
+
+![pipline](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/Semcity2.pipeline.jpg)
+<br>
 &emsp;&emsp;其中编码解码器部分主要是利用MLP将体素编码成Triplane Representation然后再解码成体素；生成部分则是利用DDPM进行Triplane的训练。
 
 ### 模型
 #### Representing a semantic scene with Triplane
+
+![autoencoder](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/Semcity3.autoencoder.jpg)
+
 <p>&emsp;&emsp;上一部分提到三维场景的自动编码器由将三维体素映射到Triplane的编码器以及将Triplane解码到三维场景的MLP解码器组成。</p>
 <p>&emsp;&emsp;编码器:输入的空间分辨率为X×Y×Z，通过三维卷积层，将输入的三维体素映射为对应的三个平面向量，特征形状为为（C×X×Y）、（C×X×Z）以及（C×Y×Z），其中C为特征维度。这样给定任意一个空间的三维坐标可以映射为三个平面特征向量的和。</p>
 <p>&emsp;&emsp;解码器：旨在通过MLP根据输入的Triplane重建三维场景并预测各个点的语义信息。具体做法为，将每个点位的Triplane以及高频sincos位置嵌入向量进行拼接得到特征向量，利用拼接后的特征向量（位置嵌入获取了高频的位置特征）输入到MLP中进行重建。</p>
 <p>&emsp;&emsp;全过程损失：整个过程的自动编码器损失由两部分组成：（1）预测概率与标签的cross entropy；（2）预测概率与标签的Lovasz-softmax并使用参数平衡两个损失权重。（旨在进行不平衡场景预测）</p>
 
 #### Triplane Diffusion
+
+![DDPM](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/Semcity4.DDPM.jpg)
+
 <p>&emsp;&emsp;扩散模型旨在通过学习编码得到的Triplane的概率分布，据此进行新的概率分布随机化，从而获得新的Triplane，再利用解码器生成新的场景。具体的增加噪声与去除噪声以及采样的原理与DDPM相同这里不再赘述。<br>
 &emsp;&emsp;值得注意的是：这里同样需要利用点位坐标信息进行嵌入与Triplane特征向量进行拼接，利用拼接后的特征向量进行场景重建。</p>
 
@@ -36,16 +47,26 @@
 3.评估：利用三维场景的保真度（IS）与多样性（召回率）来评估生成场景的质量。使用FID与KID来反映两者的综合。下游的场景完善工作使用IoU与mIoU作为指标来评估相关表现
 
 #### 实验结果——场景生成
+<p>场景生成定性结果如下图所示
+  
+  ![q1_result](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/Semcity5.%E7%94%9F%E6%88%90%E5%9C%BA%E6%99%AF%E5%AE%9A%E6%80%A7%E7%BB%93%E6%9E%9C.jpg)
+  
 <p>&emsp;&emsp;如图为评价指标。
+
+ ![q2_result](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/Semcity6.%E5%AE%9A%E9%87%8F%E6%AF%94%E8%BE%83%E7%BB%93%E6%9E%9C.jpg)
 
 <br>&emsp;&emsp;可以发现在CARlaSC数据集上，SSD（Baseline）的表现比较好，但是在Semantic KITTI上表现明显不如本文提出的Diffusion Triplane。这是因为SSD基于体素进行三维Representation 不能很好面对真实场景更为普遍的非结构以及稀疏分布问题，尤其反映在生成道路与建筑物的边界问题上与更为精细化场景上（例如树干分布）。<br>
 &emsp;&emsp;对比之下，本文提出的方法在保真性与多样性均优于Baseline，同时由于采用隐式的生成，因此生成结果的分辨率并不固定。
 
 #### 实验结果——下游应用
-<p>&emsp;&emsp;本文提出的方法在inpainting、outpainting以及Completion Refinement上均表现优于Baseline，同时可以直接利用Control Net进行真实场景绘制。
+<p>&emsp;&emsp;本文提出的方法在inpainting、outpainting以及Completion Refinement上均表现优于Baseline，同时可以直接利用Control Net进行真实场景绘制。下图为渲染结果。
+
+![RGB_result](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/Semcity7.%E6%B8%B2%E6%9F%93%E7%BB%93%E6%9E%9C.jpg)
 
 #### 消融实验
 <p>&emsp;&emsp;消融实验主要从两个部件考虑：三维重建时的位置嵌入层、Triplane Representation。<br>
+
+![al](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/Semcity8.%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C.jpg)
 
 &emsp;&emsp;嵌入层：通过原结果与不进行操作结果实验，得到上表。根据上表评价指标所示，嵌入层通过提供位置的高频信息，提高了生成结果的保真性（高频特征尤其促进了生成场景的细节）<br>
 &emsp;&emsp;Triplane Representation：这里主要讲Triplane Representation 替换为XY-plane与体素进行实验。实验结果表明Triplane可以明显提高生成结果的质量。
