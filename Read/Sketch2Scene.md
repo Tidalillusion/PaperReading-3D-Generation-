@@ -50,7 +50,7 @@ Isometric projection：一种坐标轴布置形式：XYZ三个轴的单位长度
 
 ####  1.2  2D Empty Terrain Extraction
 <p>&emsp;&emsp;该模块旨在提取不含前景的terrain map，需要对之前仍存在部分遮挡的2D Isometric image进行处理。这类似一个复杂的inpainting task但目前SOTA的扩散模型无法很好完成该工作。<br>
-&emsp;&emsp;为解决问题，使用自己创建的数据集在SDXL Inpaint上微调LORA。作者创建的数据集由三部分组成：1.具备前景的basemap（即2D影像） 2.terrain map的透视图像 3. terrain 表面纹理图像。其中对数据1，要求前景蒙版中前景不能重叠；对于其他两种任务蒙版则是来自于随机形状相交的其他前景蒙版。<br>
+&emsp;&emsp;为解决问题，使用自己创建的数据集在SDXL Inpaint上LoRA（Fine-tune 大模型的技巧）。作者创建的数据集由三部分组成：1.具备前景的basemap（即2D影像） 2.terrain map的透视图像 3. terrain 表面纹理图像。其中对数据1，要求前景蒙版中前景不能重叠；对于其他两种任务蒙版则是来自于随机形状相交的其他前景蒙版。<br>
   
 ![basemap](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/Sketch2Scene-5BasemapExample.jpg)
 
