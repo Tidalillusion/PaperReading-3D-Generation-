@@ -1,5 +1,7 @@
 # GANcraft: Unsupervised 3D Neural Rendering of Minecraft Worlds
 
+![author](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/GANcraft1_writers.png)
+
 作者团队来自于康奈尔大学与英伟达。
 <p>&emsp;&emsp;创新点：<br>
 &emsp;&emsp;1.提出了非监督的神经渲染框架，该框架可以用真实三维图像渲染block，从而将block场景（世界）渲染为真实场景（世界）。<br>
@@ -16,11 +18,17 @@
 
 ### 本文改进
 <p>&emsp;&emsp;1.在大规模数据集上预训练生成模型并微调模型后，设置相机采样参数，生成伪GT影像作为数据集进行训练；<br>
-&emsp;&emsp;2.结合风格特征向量，对场景中每个体素均进行两步渲染，渲染结果既具备泛化性，质量也超过Baseline。
+&emsp;&emsp;2.结合风格特征向量，对场景中每个体素均进行两步渲染，渲染结果既具备泛化性，质量也超过Baseline。<br>
+下图为生成伪GT影像示例：
+  
+![SPADE](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/GANcraft2_Pretrain.png)
 
 ## 模型结构
 ### overview
 <p>&emsp;&emsp;如下图所示为GAN craft的模型结构。<br>
+
+![pipeline](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/GANcraft3_pipeline.png)
+  
 &emsp;&emsp;该模型可以分为两部分：1.预训练生成模型数据生成架构； 2.两步渲染架构。<br>
 &emsp;&emsp;1.预训练生成：对体素场景进行随机相机采样，获得体素场景的分割图；根据分割图，预训练模型（SPADE）生成伪GT影像。为GT影像输入到SPADE相同风格编码器中获得风格编码，再输入到风格网络中获得风格特征向量。<br>
 &emsp;&emsp;2.两步渲染过程：对体素场景中每个体素设置八个可学习特征向量（位于八个顶点位置），进行三线性插值后获得位置编码，
@@ -36,13 +44,24 @@
 &emsp;&emsp;训练数据集由1M张在互联网上搜集的图像获得。将其中5000张作为测试集
 
 ### Baseline
-&emsp;&emsp;MUNIT、SPADE、wc-vid2vid、NSVF-W（NSVF-W为作者改进的方法与本文方法类似，基本可以理解为缺少CNN渲染）
+&emsp;&emsp;MUNIT、SPADE、wc-vid2vid、NSVF-W（NSVF-W为作者改进的方法与本文方法类似，基本可以理解为缺少CNN渲染）<br>
+与Baseline比较的采样结果如下图所示：
+
+![Baseline_sample](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/GANcraft4_quality.png)
 
 ### 评估准则：
 &emsp;&emsp;同样是分为定性与定量评估。定量准则包含FID与KID；定性标准则是让用户根据连续性与质量对生成结果进行评分。
+<br>
+定性与定量评估参数结果如下表所示：
+
+![FID&KID](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/GANcraft5_metrics_.png)
+
+![user](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/GANcraft6_meterics_users.png)
 
 ### 消融实验
 &emsp;&emsp;1.不使用伪GT，训练过程中仅仅使用GAN loss，生成结果不切实际。<br>
 &emsp;&emsp;2.仅仅使用体渲染不使用CNN渲染结果缺乏精致细节。<br>
 &emsp;&emsp;3.不使用GAN 损失生成结果暗淡、模糊。<br>
 &emsp;&emsp;4.不使用伪GT影像，虽然质量指标最优，但是生成器会为了指标生成不合理的影像。
+
+![Ablation](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/GANcraft7_Ablation.png)
