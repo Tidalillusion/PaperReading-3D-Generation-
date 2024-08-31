@@ -65,3 +65,14 @@
 &emsp;&emsp;4.不使用伪GT影像，虽然质量指标最优，但是生成器会为了指标生成不合理的影像。
 
 ![Ablation](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/GANcraft7_Ablation.png)
+
+
+## 工程实现上的理解
+### per-sample MLP and blending
+<p>&emsp;&emsp;(1)根据参数设置决定对光线方向处理（不变、设置为空、进行位置编码）；<br>
+  （2）根据光线传播的体素ID创建最后击中天空与直接命中天空的蒙版。<br>
+  （3）根据参数设置采样的光线数量<br>
+  （4）获取光线沿途采样的深度值、采样点之间的距离、采样点在深度对应的索引<br>
+  （5）将分割图中的标签进行简化（按照论文中，将实际标签映射到标准COCO标签中）<br>
+  （6）根据采样点在深度对应的索引，制作蒙版选择索引到分割图中。
+   (7)创建独热编码蒙版，将分割图设置为0与1两个部分。
