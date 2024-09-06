@@ -1,5 +1,7 @@
 # Sat2Density: Faithful Density Learning from Satellite-Ground Image Pairs
+![author](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/d7-1.%E4%BD%9C%E8%80%85%E5%9B%A2%E9%98%9F.png)
 
+![demo](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/d7-2.demo.png)
 
 创新点：<br>
 1.针对卫星图像生成3D感知的地面视图，从几何角度学习场景密度场从而实现地面全景图合成。
@@ -24,6 +26,7 @@
  &emsp;&emsp;将卫星影像输入到DensityNet编码解码器中，生成密度场的显示体积表达。
  渲染全景图深度并沿着地面视图的光线进行颜色投射，将结果输入到RenderNet中。为了确保照明一致，
  全景图中天空区域的颜色直方图被用作我们方法的条件输入。
+ ![pipeline](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/d7-3.Pipeline.png)
 
 ##  补充细节
 ### 密度场表示
@@ -41,6 +44,7 @@
 &emsp;&emsp;从天空注入光照：为了使模型不仅可以学习到光照信息，而且更加专注于地物的几何形体，
 将天空区域的RGB直方信息作为光照提示，按照固定维度进行嵌入，从而使得模型可以学习到复杂光照信息。
 
+
 # 实验
 ## 数据集与评估指标
 &emsp;&emsp;数据集：CVACT（照明控制、视屏合成） CVUSA（仅进行中心地面视图合成）  
@@ -50,8 +54,19 @@
 &emsp;&emsp;消融实验主要内容：1.天空不透明度 2.光照插入 3.将深度与最初全景图进行拼接
 <br>&emsp;&emsp;光照插入很大程度影响评价指标，透明度影响较小，而深度几乎不影响，而将透明度与光照
 结合可以很好提升指标。
+ ![ablation](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/d7-4.%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C.png)
 
 ## 实验结果
 &emsp;&emsp;中心视图合成：定量比较与定性比较结果均较好。<br>
+
+ ![result](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/d7-5.Baseline%E5%AF%B9%E6%AF%94.png)
+ 
 &emsp;&emsp;可控光照：明显可以看到提供了不同光照，道路颜色发生变化，几何特征不变。<br>
+
+ ![light_demo](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/d7-6%E5%85%89%E7%BA%BF%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%9C.png)
+
 &emsp;&emsp;地面视频合成：本文实验结果具备时空一致性。
+
+ ![video](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/d7-7.%E8%A7%86%E9%A2%91%E5%90%88%E6%88%90%E7%BB%93%E6%9E%9C.png)
+
+
