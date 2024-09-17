@@ -1,12 +1,16 @@
 # Pyramid Diffusion for Fine 3D Large Scene Generation
 
+![author](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/PDD1author.png)
 作者团队来自于西南交通大学。
+
 
 ## 创新点
 
 1.通过金字塔扩散模型实现了大型户外场景由粗到细的生成<br>
 2.对本文提出的模型进行了广泛实验，引入了新的指标，从多角度评价，验证生成质量较高。<br>
 3.本文模型应用广泛，可以从合成数据集泛化到真实世界数据场景，还可以拓展进行无限场景创建。
+
+![contributions](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/PDD2PDDcontributions.png)
 
 ## 本文挑战
 
@@ -18,7 +22,9 @@
 
 ## overview
 
-&emsp;&emsp;通过利用金字塔，先利用三个扩散模型在低分辨率尺度上生成场景，然后将生成的场景进行上采样与高分辨率场景初始化噪声拼接后作为输入进行去噪生成。在最高分辨率的层级，将场景划分为4个子场景，生成结束后利用融合算法进行融合。设置参数保证场景重叠度从而确保场景连续性的同时平衡融合算法对结果的影响。
+![pipeline](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/PDD3Pipeline.png)
+
+&emsp;&emsp;通过利用金字塔，先利用三扩散模型在低分辨率尺度上生成场景，然后将生成的场景进行上采样与高分辨率场景初始化噪声拼接后作为输入进行去噪生成。在最高分辨率的层级(本文设置为CarlaSC数据集256×256×16)，将场景划分为4个子场景，生成结束后利用融合算法进行融合。设置参数保证场景重叠度从而确保场景连续性的同时平衡融合算法对结果的影响。
 
 ## 离散扩散
 
@@ -49,13 +55,26 @@ PDD优点：不同尺度扩散模型独立，可以并行训练；可以利用�
 
 &emsp;&emsp;本文使用CarlaSC以及Semantic KITTI数据集。前者用以进行实验模型训练、消融实验以及主要质量对比实验。后者主要用以进行数据迁移实验。
 
+![generation_m](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/PDD6result_generation.png)
+
 ## Baseline
 
 &emsp;&emsp;在最大分辨率数据集场景上对原始离散扩散模型与具备VQVAE 的LDM模型训练，结果作为对比基线。
 
+![baseline](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/PDD5quality.png)
+
 ## 实验结果
 
 &emsp;&emsp;生成质量对比基线十分优异；同时作者将生成场景与训练场景相似性进行匹配差异对比，通过相似性说明这不是过拟合。<br>
+下图展示两个数据集上条件生成以及自由生成的结果。
+
+![CarLASC](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/PDD7CarLASC.png)
+
+![CarLASC_con](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/PDD8CarLASCcon.png)
+
+![Semantic_KITTO](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/PDD9SemanticKITTO.png)
+
+
 &emsp;&emsp;下游场景应用：无限场景生成与模型跨数据集迁移能力。
 
 ## 消融实验
