@@ -73,10 +73,12 @@ PDD优点：不同尺度扩散模型独立，可以并行训练；可以利用�
 
 ![CarLASC_con](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/PDD8CarLASCcon.png)
 
-![Semantic_KITTO](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/PDD9SemanticKITTO.png)
+
 
 
 &emsp;&emsp;下游场景应用：无限场景生成与模型跨数据集迁移能力。
+
+![Semantic_KITTO](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/Image/PDD9SemanticKITTO.png)
 
 ## 消融实验
 
