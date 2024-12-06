@@ -1,11 +1,9 @@
 
 # PaperReading-3D-Generation
-（GG喵）
 <p>This repository is built to record the paper I have read for me to revise.<br>  Hope that by writing and sharing, I coulde make progress.</p>
 <P> 
 The Table 1 is the paper that I have intensive reading, so there will be detailed information about this paper. If I have read the code, I will show my understanding about it. If it is the early work that I think it is important, I will not show the result of the expriment the author showing in the paper. I will oly show the recent work's result.<br>
 The Table 2 is the paper that I have skimmed, so there will just abound with something interesting for me.<br> 
-I have divide this into 4 parts: <br>(1) Use the 3DGS <br>(2) Use the NeFR <br>(3) Use the Diffusion model <br>(4) Other related papers(such as dataset, 2D generation, other 3D generation).
 
 # Table 1(Intensive Reading) 
 | Title | Author | Source | Overview |
@@ -20,11 +18,3 @@ I have divide this into 4 parts: <br>(1) Use the 3DGS <br>(2) Use the NeFR <br>(
 |Pyramid Diffusion for Fine 3D Large Scene Generation<br>[DooDoo_xy's Note](https://github.com/Tidalillusion/PaperReading-3D-Generation-/blob/main/Read/PDD.md)<br>[Arxiv](https://arxiv.org/abs/2311.12085)<br>[GitHub](https://github.com/yuhengliu02/pyramid-discrete-diffusion?tab=readme-ov-file)|Yuheng Liu, Xinke Li, Xueting Li, Lu Qi <br>西南交通大学|ECCV 2024|1.通过金字塔扩散模型实现了大型户外场景由粗到细的生成<br>2.对本文提出的模型进行了广泛实验，引入了新的指标，从多角度评价，验证生成质量较高。<br>3.本文模型应用广泛，可以从合成数据集泛化到真实世界数据场景，还可以拓展进行无限场景创建。|
 
 
-
-# table 2.1(skimming-3DGS)
-
-# table 2.2(skimming-NeRF)
-
-# table 2.3(skimming-Diffusion)
-
-# tanle 2.4(skimming-others)
