@@ -1,5 +1,6 @@
 
 # PaperReading-3D-Generation
+（GG喵）
 <p>This repository is built to record the paper I have read for me to revise.<br>  Hope that by writing and sharing, I coulde make progress.</p>
 <P> 
 The Table 1 is the paper that I have intensive reading, so there will be detailed information about this paper. If I have read the code, I will show my understanding about it. If it is the early work that I think it is important, I will not show the result of the expriment the author showing in the paper. I will oly show the recent work's result.<br>
